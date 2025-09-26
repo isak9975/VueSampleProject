@@ -1,24 +1,22 @@
 <template>
     <div class="MainContainer">
-        <h2>메인페이지 입니다</h2>
+        <h2>사이드바</h2>
     </div>
 </template>
 
-<script lang="ts">
-    export default {
-        name:'MainPage',
-        props:{},
-    }
+<script lang="tsx">
+export default {
+    name: "SideBar",
+
+}
 </script>
 
-<style scoped>
+<style lang="css" scoped>
 .MainContainer {
-    display:flex;
-    margin-top:10px;
-    height: 86vh;
     border: 1px solid black;
     border-radius: 8px; 
+    font-size: 24px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
 }
-
 </style>

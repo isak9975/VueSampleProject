@@ -1,21 +1,17 @@
 <template>
     <div class="MainContainer">
-        <h2>메인페이지 입니다</h2>
+        <span>로그인 페이지입니다.</span>
     </div>
 </template>
 
-<script lang="ts">
-    export default {
-        name:'MainPage',
-        props:{},
-    }
+<script setup lang="tsx">
 </script>
 
 <style scoped>
 .MainContainer {
     display:flex;
     margin-top:10px;
-    height: 86vh;
+    height: 85vh;
     border: 1px solid black;
     border-radius: 8px; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
