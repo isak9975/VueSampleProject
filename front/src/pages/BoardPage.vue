@@ -1,5 +1,5 @@
 <template>
-    <Moc class="MainContainer" v-model:visible="showModal">
+    <div class="MainContainer">
         <!-- 타이틀 -->
         <h2>{{ categoryId }}의 보드 페이지 입니다</h2>
 
@@ -10,20 +10,46 @@
             <BoardComponent v-for="board in boardData" class="DataOne" :title='board.title' :key='board.id'
                 :content="board.content" :img="board.img" :likes="board.likes" :comments="board.comments" />
         </div>
+
+        <Modal v-model:visible="showModal">
+            <!-- 모달로 전달할 내용들 -->
+            <div class="showModal">
+                제목 : <input v-model="formData.title"/>
+                내용 : <textarea v-model="formData.content"></textarea>
+                이미지:<img class="modal-img" v-bind:src="formData.img?formData.img:cats[1].source" alt="예시이미지"/>
+            </div>
+            <button @click="save">작성완료</button>
+        </Modal>
     </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import BoardComponent from '../components/BoardComponent.vue';
 import { cats } from '../components/img.ts'
+import Modal from '../components/Modal.vue';
 
 const route = useRoute();
 const categoryId = ref(route.params.categoryId);
 watch(() => route.params.categoryId, (newID) => { categoryId.value = newID })
 
 const showModal = ref(false);
+// 모달창 열기
+function write(){
+    showModal.value = !showModal.value;
+}
+// [post]작성하기
+async function save(){
+    console.log(formData)
+    await alert("작성이 완료되었습니다.")
+    showModal.value = !showModal.value;
+}
+const formData = reactive({
+    title : "",
+    content : "",
+    img : "",
+})
 
 const boardData = [
     {
@@ -73,8 +99,6 @@ const boardData = [
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.WriteButton {}
-
 .DataContainer {
     display: flex;
     flex-direction: row;
@@ -86,5 +110,14 @@ const boardData = [
 .DataOne {
     flex: 0 0 calc(33.333% - 20px);
     display: flex;
+}
+
+.showModal{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-img{
+    
 }
 </style>
